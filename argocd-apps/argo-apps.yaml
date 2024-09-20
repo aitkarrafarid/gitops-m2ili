@@ -1,0 +1,23 @@
+#apiVersion: argoproj.io/v1alpha1
+#kind: Application
+#metadata:
+#  name: nginx
+#  namespace: projet-filiere-enquete-preparer-collecter-lab
+#  finalizers:
+#    # The default behaviour is foreground cascading deletion
+#    - resources-finalizer.argocd.argoproj.io
+#    # Alternatively, you can use background cascading deletion
+#    # - resources-finalizer.argocd.argoproj.io/background
+#spec:
+#  destination:
+#    namespace: projet-filiere-enquete-preparer-collecter-lab
+#    name: in-cluster
+#  project: projet-filiere-enquete-preparer-collecter-lab
+#  source:
+#    path: apps/argo-cd
+#    repoURL: https://gitlab.insee.fr/filiere-enquete/preparer-collecter/gitops/gitops-template-lab.git
+#    targetRevision: main
+#  syncPolicy:
+#    automated:
+#      prune: true
+#      selfHeal: true

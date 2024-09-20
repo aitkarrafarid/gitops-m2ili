@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploiement-nginx
+#  namespace: projet-filiere-enquete-preparer-collecter-lab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        #        - image: nginx:latest
+        # https://medium.com/kocsistem/how-to-run-nginx-for-root-non-root-5ceb13db6d41
+        - image: nginxinc/nginx-unprivileged
+          #        - image: bhargavshah86/kube-test:v0.1
+          name: nginx
+          securityContext:
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+            runAsUser: 2000
+            runAsGroup: 3000
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          ports:
+            - containerPort: 8080
+              name: web
+#          volumeMounts:
+#            - name: config-vol
+#              mountPath: /etc/nginx/
+#      volumes:
+#        - name: config-vol
+#          configMap:
+#            name: nginx-config
+#            items:
+#              - key: nginx.conf
+#                path: nginx.conf
+
+
