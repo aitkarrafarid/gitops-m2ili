@@ -7,7 +7,7 @@ spec:
   destination:
     namespace: default
     name: in-cluster
-  project: projet-m2ili
+  project: m2ili
   source:
     path: argocd-apps
     repoURL: https://github.com/aitkarrafarid/gitops-m2ili.git
